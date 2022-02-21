@@ -9,6 +9,7 @@ Javascript Concepts to learn
 - [React Context API Interview Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/ReactJs/react-context-api-interview-questions.md)
 - [React Hooks Interview Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/ReactJs/react-hooks-interview-questions.md)
 - [React Refs Interview Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/ReactJs/react-refs-interview-questions.md)
+- [React Render Props Interview Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/ReactJs/react-render-props-interview-questions.md)
 
 ## React Query
 
