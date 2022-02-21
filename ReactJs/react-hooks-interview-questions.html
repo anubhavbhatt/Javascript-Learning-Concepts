@@ -1,0 +1,476 @@
+<div >
+    <h1>React Hooks Interview Questions</h1>
+    <div><small>Published on
+            <!-- -->19 Jan, 2021
+        </small></div>
+    <p><strong>Question:</strong></p>
+    <p>What are hooks in React?</p>
+    <p><strong>Answer:</strong></p>
+    <p>Hooks are a new feature added in React v16.8. It allows to use all React features without writing class
+        components. For example, before version 16.8, we need a class component to manage state of a component. Now we
+        can keep state in a functional component using <code >useState</code> hook.</p>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>Will React hooks work inside class components?</p>
+    <p><strong>Answer:</strong></p>
+    <p>No</p>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>Why React hooks was introduced?</p>
+    <p><strong>Answer:</strong></p>
+    <p>One reason to introduce hooks was the complexity in dealing with <code >this</code> keyword
+        inside class components. If not handled properly, <code >this</code> will take some other
+        value. That will result in breaking lines like <code >this.setState()</code> and other
+        event handlers. Using hooks, we avoid that complexity when working with functional components.</p>
+    <p>Class components do not minify very well and also make hot reloading unreliable. That is another inspiration to
+        bring hooks.</p>
+    <p>Another reason is that, there is no specific way to reuse stateful component logic. Even though HOC and render
+        props patterns address this problem, that asks for modifying the class component code. Hooks allow to share
+        stateful logic without changing the component hierarchy.</p>
+    <p>Fourth reason is, in a complex class component, related code are scattered in different lifecycle methods.
+        Example, in case of a data fetching, we do that mainly in <code >componentDidMount()</code>
+        and <code >componentDidUpdate()</code>. Another example is, in case of event listeners, we
+        use <code >componentDidMount()</code> to bind an event and <code
+            >componentWillUnmount()</code> to unbind. Hooks instead helps to place related code
+        together.</p>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>How <code >useState</code> hook works? What is/are the arguments accepted by this hook and
+        what is returned by the hook?</p>
+    <p><strong>Answer:</strong></p>
+    <p><code >useState</code> hook is a function which is used to store state value in a functional
+        component. It accepts an argument as the initial value of the state. It returns an array with 2 elements. First
+        element is the current value of state. Second element is a function to update the state.</p>
+    <p>We import <code >useState</code> first from React by</p>
+    <div  data-language="javascript">
+        <pre
+            ><code ><span >import</span> React<span >,</span> <span >{</span> useState <span >}</span> <span >from</span> <span >"react"</span><span >;</span></code></pre>
+    </div>
+    <p>Later we use <code >useState</code> like:</p>
+    <div  data-language="javascript">
+        <pre
+            ><code ><span >const</span> <span >[</span>currentStateValue<span >,</span> functionToUpdateState<span >]</span> <span >=</span> <span >useState</span><span >(</span>initialStateValue<span >)</span><span >;</span></code></pre>
+    </div>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>Here we have a class component with a state value. Each time the button in component is clicked, the count is
+        incremented.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >class</span> <span >Counter</span> <span >extends</span> <span >Component</span> <span >{</span>
+  state <span >=</span> <span >{</span>
+    count<span >:</span> <span >0</span><span >,</span>
+  <span >}</span><span >;</span>
+
+  <span >incrementCount</span> <span >=</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >this</span><span >.</span><span >setState</span><span >(</span><span >{</span>
+      count<span >:</span> <span >this</span><span >.</span>state<span >.</span>count <span >+</span> <span >1</span><span >,</span>
+    <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >render</span><span >(</span><span >)</span> <span >{</span>
+    <span >return</span> <span >(</span>
+      <span >&lt;</span>div<span >&gt;</span>
+        <span >&lt;</span>button onClick<span >=</span><span >{</span><span >this</span><span >.</span>incrementCount<span >}</span><span >&gt;</span>Count<span >:</span> <span >{</span><span >this</span><span >.</span>state<span >.</span>count<span >}</span><span >&lt;</span><span >/</span>button<span >&gt;</span>
+      <span >&lt;</span><span >/</span>div<span >&gt;</span>
+    <span >)</span><span >;</span>
+  <span >}</span>
+<span >}</span></code></pre>
+    </div>
+    <p>Rewrite this component using React hooks.</p>
+    <p><strong>Answer:</strong></p>
+    <div  data-language="javascript">
+        <pre ><code ><span >import</span> React<span >,</span> <span >{</span> useState <span >}</span> <span >from</span> <span >"react"</span><span >;</span>
+
+<span >function</span> <span >Counter</span><span >(</span><span >)</span> <span >{</span>
+  <span >const</span> <span >[</span>count<span >,</span> setCount<span >]</span> <span >=</span> <span >useState</span><span >(</span><span >0</span><span >)</span><span >;</span>
+
+  <span >return</span> <span >(</span>
+    <span >&lt;</span>div<span >&gt;</span>
+      <span >&lt;</span>button
+        onClick<span >=</span><span >{</span><span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+          <span >setCount</span><span >(</span>count <span >+</span> <span >1</span><span >)</span><span >;</span>
+        <span >}</span><span >}</span>
+      <span >&gt;</span>
+        Count<span >:</span> <span >{</span>count<span >}</span>
+      <span >&lt;</span><span >/</span>button<span >&gt;</span>
+    <span >&lt;</span><span >/</span>div<span >&gt;</span>
+  <span >)</span><span >;</span>
+<span >}</span></code></pre>
+    </div>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>Below we have a class component. It contains code to update the state based on previous state value.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >class</span> <span >Counter</span> <span >extends</span> <span >Component</span> <span >{</span>
+  state <span >=</span> <span >{</span>
+    count<span >:</span> <span >0</span><span >,</span>
+  <span >}</span><span >;</span>
+
+  <span >incrementCount</span> <span >=</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >this</span><span >.</span><span >setState</span><span >(</span><span >(</span><span >prevState</span><span >)</span> <span >=&gt;</span> <span >{</span>
+      <span >return</span> <span >{</span>
+        count<span >:</span> prevState<span >.</span>count <span >+</span> <span >1</span><span >,</span>
+      <span >}</span><span >;</span>
+    <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >decrementCount</span> <span >=</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >this</span><span >.</span><span >setState</span><span >(</span><span >(</span><span >prevState</span><span >)</span> <span >=&gt;</span> <span >{</span>
+      <span >return</span> <span >{</span>
+        count<span >:</span> prevState<span >.</span>count <span >-</span> <span >1</span><span >,</span>
+      <span >}</span><span >;</span>
+    <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >render</span><span >(</span><span >)</span> <span >{</span>
+    <span >return</span> <span >(</span>
+      <span >&lt;</span>div<span >&gt;</span>
+        <span >&lt;</span>strong<span >&gt;</span>Count<span >:</span> <span >{</span><span >this</span><span >.</span>state<span >.</span>count<span >}</span><span >&lt;</span><span >/</span>strong<span >&gt;</span>
+        <span >&lt;</span>button onClick<span >=</span><span >{</span><span >this</span><span >.</span>incrementCount<span >}</span><span >&gt;</span>Increment<span >&lt;</span><span >/</span>button<span >&gt;</span>
+        <span >&lt;</span>button onClick<span >=</span><span >{</span><span >this</span><span >.</span>decrementCount<span >}</span><span >&gt;</span>Decrement<span >&lt;</span><span >/</span>button<span >&gt;</span>
+      <span >&lt;</span><span >/</span>div<span >&gt;</span>
+    <span >)</span><span >;</span>
+  <span >}</span>
+<span >}</span></code></pre>
+    </div>
+    <p>Rewrite the above code using React hooks.</p>
+    <p><strong>Answer:</strong></p>
+    <p>One can update the value of a state variable just by passing the new value to update function or by passing a
+        callback function. Second technique which accepts a callback function is safe to use.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >import</span> React<span >,</span> <span >{</span> useState <span >}</span> <span >from</span> <span >"react"</span><span >;</span>
+
+<span >function</span> <span >Counter</span><span >(</span><span >)</span> <span >{</span>
+  <span >const</span> <span >[</span>count<span >,</span> setCount<span >]</span> <span >=</span> <span >useState</span><span >(</span><span >0</span><span >)</span><span >;</span>
+
+  <span >const</span> <span >incrementCount</span> <span >=</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >setCount</span><span >(</span><span >(</span><span >prevCount</span><span >)</span> <span >=&gt;</span> <span >{</span>
+      <span >return</span> prevCount <span >+</span> <span >1</span><span >;</span>
+    <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >const</span> <span >decrementCount</span> <span >=</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >setCount</span><span >(</span><span >(</span><span >prevCount</span><span >)</span> <span >=&gt;</span> <span >{</span>
+      <span >return</span> prevCount <span >-</span> <span >1</span><span >;</span>
+    <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >return</span> <span >(</span>
+    <span >&lt;</span>div<span >&gt;</span>
+      <span >&lt;</span>strong<span >&gt;</span>Count<span >:</span> <span >{</span>count<span >}</span><span >&lt;</span><span >/</span>strong<span >&gt;</span>
+      <span >&lt;</span>button onClick<span >=</span><span >{</span>incrementCount<span >}</span><span >&gt;</span>Increment<span >&lt;</span><span >/</span>button<span >&gt;</span>
+      <span >&lt;</span>button onClick<span >=</span><span >{</span>decrementCount<span >}</span><span >&gt;</span>Decrement<span >&lt;</span><span >/</span>button<span >&gt;</span>
+    <span >&lt;</span><span >/</span>div<span >&gt;</span>
+  <span >)</span><span >;</span>
+<span >}</span></code></pre>
+    </div>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>Here we have class component that updates the state using the input from a form.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >export</span> <span >class</span> <span >Profile</span> <span >extends</span> <span >Component</span> <span >{</span>
+  state <span >=</span> <span >{</span>
+    name<span >:</span> <span >"Backbencher"</span><span >,</span>
+    age<span >:</span> <span >23</span><span >,</span>
+  <span >}</span><span >;</span>
+
+  <span >onNameChange</span> <span >=</span> <span >(</span><span >e</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >this</span><span >.</span><span >setState</span><span >(</span><span >{</span>
+      name<span >:</span> e<span >.</span>target<span >.</span>value<span >,</span>
+    <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >onAgeChange</span> <span >=</span> <span >(</span><span >e</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >this</span><span >.</span><span >setState</span><span >(</span><span >{</span>
+      age<span >:</span> e<span >.</span>target<span >.</span>value<span >,</span>
+    <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >render</span><span >(</span><span >)</span> <span >{</span>
+    <span >return</span> <span >(</span>
+      <span >&lt;</span>div<span >&gt;</span>
+        <span >&lt;</span>form<span >&gt;</span>
+          <span >&lt;</span>input
+            type<span >=</span><span >"text"</span>
+            value<span >=</span><span >{</span><span >this</span><span >.</span>state<span >.</span>name<span >}</span>
+            onChange<span >=</span><span >{</span><span >this</span><span >.</span>onNameChange<span >}</span>
+          <span >/</span><span >&gt;</span>
+          <span >&lt;</span>input
+            type<span >=</span><span >"text"</span>
+            value<span >=</span><span >{</span><span >this</span><span >.</span>state<span >.</span>age<span >}</span>
+            onChange<span >=</span><span >{</span><span >this</span><span >.</span>onAgeChange<span >}</span>
+          <span >/</span><span >&gt;</span>
+          <span >&lt;</span>h2<span >&gt;</span>
+            Name<span >:</span> <span >{</span><span >this</span><span >.</span>state<span >.</span>name<span >}</span><span >,</span> Age<span >:</span> <span >{</span><span >this</span><span >.</span>state<span >.</span>age<span >}</span>
+          <span >&lt;</span><span >/</span>h2<span >&gt;</span>
+        <span >&lt;</span><span >/</span>form<span >&gt;</span>
+      <span >&lt;</span><span >/</span>div<span >&gt;</span>
+    <span >)</span><span >;</span>
+  <span >}</span>
+<span >}</span></code></pre>
+    </div>
+    <p>Rewrite the same component using React hooks.</p>
+    <p><strong>Answer:</strong></p>
+    <div  data-language="javascript">
+        <pre ><code ><span >import</span> React<span >,</span> <span >{</span> useState <span >}</span> <span >from</span> <span >"react"</span><span >;</span>
+
+<span >function</span> <span >Profile</span><span >(</span><span >)</span> <span >{</span>
+  <span >const</span> <span >[</span>profile<span >,</span> setProfile<span >]</span> <span >=</span> <span >useState</span><span >(</span><span >{</span>
+    name<span >:</span> <span >"Backbencher"</span><span >,</span>
+    age<span >:</span> <span >24</span><span >,</span>
+  <span >}</span><span >)</span><span >;</span>
+
+  <span >const</span> <span >onNameChange</span> <span >=</span> <span >(</span><span >e</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >setProfile</span><span >(</span><span >{</span> <span >...</span>profile<span >,</span> name<span >:</span> e<span >.</span>target<span >.</span>value <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >const</span> <span >onAgeChange</span> <span >=</span> <span >(</span><span >e</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >setProfile</span><span >(</span><span >{</span> <span >...</span>profile<span >,</span> age<span >:</span> e<span >.</span>target<span >.</span>value <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >return</span> <span >(</span>
+    <span >&lt;</span>div<span >&gt;</span>
+      <span >&lt;</span>form<span >&gt;</span>
+        <span >&lt;</span>input type<span >=</span><span >"text"</span> value<span >=</span><span >{</span>profile<span >.</span>name<span >}</span> onChange<span >=</span><span >{</span>onNameChange<span >}</span> <span >/</span><span >&gt;</span>
+        <span >&lt;</span>input type<span >=</span><span >"text"</span> value<span >=</span><span >{</span>profile<span >.</span>age<span >}</span> onChange<span >=</span><span >{</span>onAgeChange<span >}</span> <span >/</span><span >&gt;</span>
+        <span >&lt;</span>h2<span >&gt;</span>
+          Name<span >:</span> <span >{</span>profile<span >.</span>name<span >}</span><span >,</span> Age<span >:</span> <span >{</span>profile<span >.</span>age<span >}</span>
+        <span >&lt;</span><span >/</span>h2<span >&gt;</span>
+      <span >&lt;</span><span >/</span>form<span >&gt;</span>
+    <span >&lt;</span><span >/</span>div<span >&gt;</span>
+  <span >)</span><span >;</span>
+<span >}</span></code></pre>
+    </div>
+    <p>The setter function of <code >useState()</code> does not automatically merge if an object is
+        stored in state. But in case of <code >setState()</code> method in class components, auto
+        merging happens.</p>
+    <p>Here we are merging object properties with the help of JavaScript spread operator.</p>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>What are the differences in using hooks and class components with respect to state management?</p>
+    <p><strong>Answer:</strong></p>
+    <p>When using <code >setState()</code> in class components, always the state variable is an
+        object. Where as, the state variable in hooks can be of any type like number, string, boolean, object or array.
+    </p>
+    <p>When state variable is an object, <code >setState()</code> in class components automatically
+        merges the new value to the state object. But in case of setter function in <code
+            >useState()</code>, we need to explicitly merge the updated object property using
+        spread operator.</p>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>What is the purpose of <code >useEffect</code> hook?</p>
+    <p><strong>Answer:</strong></p>
+    <p>The Effect hook lets us to perform side effects in functional components. It helps us to avoid redundant code in
+        different lifecycle methods of a class component. It helps to group related code.</p>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>Here is a class component that prints <em>Boom</em> in console whenever it is mounted or updated.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >export</span> <span >class</span> <span >Banner</span> <span >extends</span> <span >Component</span> <span >{</span>
+  state <span >=</span> <span >{</span>
+    count<span >:</span> <span >0</span><span >,</span>
+  <span >}</span><span >;</span>
+
+  <span >updateState</span> <span >=</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >this</span><span >.</span><span >setState</span><span >(</span><span >{</span>
+      count<span >:</span> <span >this</span><span >.</span>state<span >.</span>count <span >+</span> <span >1</span><span >,</span>
+    <span >}</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >componentDidMount</span><span >(</span><span >)</span> <span >{</span>
+    console<span >.</span><span >log</span><span >(</span><span >"Boom"</span><span >)</span><span >;</span>
+  <span >}</span>
+
+  <span >componentDidUpdate</span><span >(</span><span >)</span> <span >{</span>
+    console<span >.</span><span >log</span><span >(</span><span >"Boom"</span><span >)</span><span >;</span>
+  <span >}</span>
+
+  <span >render</span><span >(</span><span >)</span> <span >{</span>
+    <span >return</span> <span >(</span>
+      <span >&lt;</span>div<span >&gt;</span>
+        <span >&lt;</span>button onClick<span >=</span><span >{</span><span >this</span><span >.</span>updateState<span >}</span><span >&gt;</span>State<span >:</span> <span >{</span><span >this</span><span >.</span>state<span >.</span>count<span >}</span><span >&lt;</span><span >/</span>button<span >&gt;</span>
+      <span >&lt;</span><span >/</span>div<span >&gt;</span>
+    <span >)</span><span >;</span>
+  <span >}</span>
+<span >}</span></code></pre>
+    </div>
+    <p>Remove the redundant console.log statement using React hooks.</p>
+    <p><strong>Answer:</strong></p>
+    <p><code >componentDidMount()</code> and <code
+            >componentDidUpdate()</code> are lifecycle methods. Such side effects can be done using
+        <code >useEffect</code> hook. <code >useEffect</code> hook is a
+        function which accepts a callback function. That callback function is called every time render happens.</p>
+    <p>The code can be rewritten as:</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >import</span> React<span >,</span> <span >{</span> useState<span >,</span> useEffect <span >}</span> <span >from</span> <span >"react"</span><span >;</span>
+
+<span >function</span> <span >Banner</span><span >(</span><span >)</span> <span >{</span>
+  <span >const</span> <span >[</span>count<span >,</span> setCount<span >]</span> <span >=</span> <span >useState</span><span >(</span><span >0</span><span >)</span><span >;</span>
+
+  <span >useEffect</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    console<span >.</span><span >log</span><span >(</span><span >"Boom"</span><span >)</span><span >;</span>
+  <span >}</span><span >)</span><span >;</span>
+
+  <span >const</span> <span >updateState</span> <span >=</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >setCount</span><span >(</span>count <span >+</span> <span >1</span><span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+
+  <span >return</span> <span >(</span>
+    <span >&lt;</span>div<span >&gt;</span>
+      <span >&lt;</span>button onClick<span >=</span><span >{</span>updateState<span >}</span><span >&gt;</span>State<span >:</span> <span >{</span>count<span >}</span><span >&lt;</span><span >/</span>button<span >&gt;</span>
+    <span >&lt;</span><span >/</span>div<span >&gt;</span>
+  <span >)</span><span >;</span>
+<span >}</span></code></pre>
+    </div>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>Understand the code below:</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >function</span> <span >Banner</span><span >(</span><span >)</span> <span >{</span>
+  <span >const</span> <span >[</span>count<span >,</span> setCount<span >]</span> <span >=</span> <span >useState</span><span >(</span><span >0</span><span >)</span><span >;</span>
+  <span >const</span> <span >[</span>name<span >,</span> setName<span >]</span> <span >=</span> <span >useState</span><span >(</span><span >""</span><span >)</span><span >;</span>
+
+  <span >useEffect</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    console<span >.</span><span >log</span><span >(</span><span >"Count is updated"</span><span >)</span><span >;</span>
+  <span >}</span><span >)</span><span >;</span>
+
+  <span >return</span> <span >(</span>
+    <span >&lt;</span>div<span >&gt;</span>
+      <span >&lt;</span>button onClick<span >=</span><span >{</span><span >(</span><span >)</span> <span >=&gt;</span> <span >setCount</span><span >(</span>count <span >+</span> <span >1</span><span >)</span><span >}</span><span >&gt;</span>State<span >:</span> <span >{</span>count<span >}</span><span >&lt;</span><span >/</span>button<span >&gt;</span>
+      <span >&lt;</span>input
+        type<span >=</span><span >"text"</span>
+        value<span >=</span><span >{</span>name<span >}</span>
+        onChange<span >=</span><span >{</span><span >(</span><span >e</span><span >)</span> <span >=&gt;</span> <span >setName</span><span >(</span>e<span >.</span>target<span >.</span>value<span >)</span><span >}</span>
+      <span >/</span><span >&gt;</span>
+    <span >&lt;</span><span >/</span>div<span >&gt;</span>
+  <span >)</span><span >;</span>
+<span >}</span></code></pre>
+    </div>
+    <p>It logs "Count is updated" message even when updating the value in textbox. How can we show the log message only
+        when the count state is updated?</p>
+    <p><strong>Answer:</strong></p>
+    <p><code >useEffect</code> function accepts a second parameter which should be an array. Within
+        this array, we need to pass the props or state we need to watch for. Only if those props or state mentioned in
+        the array change, the effect is executed. So in our code, we add the second argument and specify only <code
+            >count</code> value in the array.</p>
+    <p>Here is the udpated <code >useEffect</code> code:</p>
+    <div  data-language="javascript">
+        <pre
+            ><code ><span >useEffect</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+  console<span >.</span><span >log</span><span >(</span><span >"Count is updated"</span><span >)</span><span >;</span>
+<span >}</span><span >,</span> <span >[</span>count<span >]</span><span >)</span><span >;</span></code></pre>
+    </div>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>We have got a class component that updates time every second. It uses <code
+            >componentDidMount()</code> to set the timer.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >export</span> <span >class</span> <span >Clock</span> <span >extends</span> <span >Component</span> <span >{</span>
+  state <span >=</span> <span >{</span>
+    date<span >:</span> <span >new</span> <span >Date</span><span >(</span><span >)</span><span >,</span>
+  <span >}</span><span >;</span>
+
+  <span >componentDidMount</span><span >(</span><span >)</span> <span >{</span>
+    <span >setInterval</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+      <span >this</span><span >.</span><span >setState</span><span >(</span><span >{</span>
+        date<span >:</span> <span >new</span> <span >Date</span><span >(</span><span >)</span><span >,</span>
+      <span >}</span><span >)</span><span >;</span>
+    <span >}</span><span >,</span> <span >1000</span><span >)</span><span >;</span>
+  <span >}</span>
+
+  <span >render</span><span >(</span><span >)</span> <span >{</span>
+    <span >return</span> <span >&lt;</span>div<span >&gt;</span><span >{</span><span >this</span><span >.</span>state<span >.</span>date<span >.</span><span >toString</span><span >(</span><span >)</span><span >}</span><span >&lt;</span><span >/</span>div<span >&gt;</span><span >;</span>
+  <span >}</span>
+<span >}</span></code></pre>
+    </div>
+    <p>Convert the above code to React hooks.</p>
+    <p><strong>Answer:</strong></p>
+    <p><code >componentDidMount()</code> is a lifecycle method that executes only once in a
+        component lifecycle. We use <code >useEffect</code> to bring effects of <code
+            >componentDidMount()</code>. But <code >useEffect</code> runs on
+        every props or state updation. To prevent it, we make use of second array argument of <code
+            >useState</code>. We keep that array empty. So for React, there are no props or state
+        to watch for. Therefore <code >useEffect</code> runs only once like <code
+            >componentDidMount()</code>.</p>
+    <p>Here is the code using React hooks.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >function</span> <span >Clock</span><span >(</span><span >)</span> <span >{</span>
+  <span >const</span> <span >[</span>date<span >,</span> setDate<span >]</span> <span >=</span> <span >useState</span><span >(</span><span >new</span> <span >Date</span><span >(</span><span >)</span><span >)</span><span >;</span>
+
+  <span >useEffect</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    <span >setInterval</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+      <span >setDate</span><span >(</span><span >new</span> <span >Date</span><span >(</span><span >)</span><span >)</span><span >;</span>
+    <span >}</span><span >,</span> <span >1000</span><span >)</span><span >;</span>
+  <span >}</span><span >,</span> <span >[</span><span >]</span><span >)</span><span >;</span>
+
+  <span >return</span> <span >&lt;</span>div<span >&gt;</span><span >{</span>date<span >.</span><span >toString</span><span >(</span><span >)</span><span >}</span><span >&lt;</span><span >/</span>div<span >&gt;</span><span >;</span>
+<span >}</span></code></pre>
+    </div>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>We have a code snippet from a class component which registers and remove an event listener.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >componentDidMount</span><span >(</span><span >)</span> <span >{</span>
+  window<span >.</span><span >addEventListener</span><span >(</span><span >"mousemove"</span><span >,</span> <span >this</span><span >.</span>handleMousePosition<span >)</span><span >;</span>
+<span >}</span>
+
+<span >componentWillUnmount</span><span >(</span><span >)</span> <span >{</span>
+  window<span >.</span><span >removeEventListener</span><span >(</span><span >"mousemove"</span><span >,</span> <span >this</span><span >.</span>handleMousePosition<span >)</span><span >;</span>
+<span >}</span></code></pre>
+    </div>
+    <p>Convert this code to React hooks format.</p>
+    <p><strong>Answer:</strong></p>
+    <div  data-language="javascript">
+        <pre
+            ><code ><span >useEffect</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+  window<span >.</span><span >addEventListener</span><span >(</span><span >"mousemove"</span><span >,</span> handleMousePosition<span >)</span><span >;</span>
+
+  <span >return</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >{</span>
+    window<span >.</span><span >removeEventListener</span><span >(</span><span >"mousemove"</span><span >,</span> handleMousePosition<span >)</span><span >;</span>
+  <span >}</span><span >;</span>
+<span >}</span><span >,</span> <span >[</span><span >]</span><span >)</span><span >;</span></code></pre>
+    </div>
+    <div class="divider-module--divider--L0Vkx">----o----</div>
+    <p><strong>Question:</strong></p>
+    <p>Here is a code snippet from a Context consumer component.</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >import</span> <span >{</span> NameContext<span >,</span> AgeContext <span >}</span> <span >from</span> <span >"./ProviderComponent"</span><span >;</span>
+
+<span >export</span> <span >class</span> <span >ConsumerComponent</span> <span >extends</span> <span >Component</span> <span >{</span>
+  <span >render</span><span >(</span><span >)</span> <span >{</span>
+    <span >return</span> <span >(</span>
+      <span >&lt;</span>NameContext<span >.</span>Consumer<span >&gt;</span>
+        <span >{</span><span >(</span><span >name</span><span >)</span> <span >=&gt;</span> <span >{</span>
+          <span >return</span> <span >(</span>
+            <span >&lt;</span>AgeContext<span >.</span>Consumer<span >&gt;</span>
+              <span >{</span><span >(</span><span >age</span><span >)</span> <span >=&gt;</span> <span >(</span>
+                <span >&lt;</span>div<span >&gt;</span>
+                  Name<span >:</span> <span >{</span>name<span >}</span><span >,</span> Age<span >:</span> <span >{</span>age<span >}</span>
+                <span >&lt;</span><span >/</span>div<span >&gt;</span>
+              <span >)</span><span >}</span>
+            <span >&lt;</span><span >/</span>AgeContext<span >.</span>Consumer<span >&gt;</span>
+          <span >)</span><span >;</span>
+        <span >}</span><span >}</span>
+      <span >&lt;</span><span >/</span>NameContext<span >.</span>Consumer<span >&gt;</span>
+    <span >)</span><span >;</span>
+  <span >}</span>
+<span >}</span></code></pre>
+    </div>
+    <p>Rewrite the <code >ConsumerComponent</code> using <code
+            >useContext</code> React hook.</p>
+    <p><strong>Answer:</strong></p>
+    <p>Hooks can be used only in a functional component. The <code >ConsumerComponent</code> can be
+        re-written as:</p>
+    <div  data-language="javascript">
+        <pre ><code ><span >function</span> <span >ConsumerComponent</span><span >(</span><span >)</span> <span >{</span>
+  <span >const</span> name <span >=</span> <span >useContext</span><span >(</span>NameContext<span >)</span><span >;</span>
+  <span >const</span> age <span >=</span> <span >useContext</span><span >(</span>AgeContext<span >)</span><span >;</span>
+
+  <span >return</span> <span >(</span>
+    <span >&lt;</span>div<span >&gt;</span>
+      Name<span >:</span> <span >{</span>name<span >}</span><span >,</span> Age<span >:</span> <span >{</span>age<span >}</span>
+    <span >&lt;</span><span >/</span>div<span >&gt;</span>
+  <span >)</span><span >;</span>
+<span >}</span></code></pre>
+    </div>
+</div>

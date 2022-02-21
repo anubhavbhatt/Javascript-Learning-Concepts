@@ -1,2 +1,11 @@
 # Javascript Learning Concepts
- Javascript Cncepts to learn
+
+Javascript Concepts to learn
+
+## React JS
+
+    - [React Basic Interview Questions] ( https://github.com/anubhavbhatt/javascript-learning-concepts/ReactJs/react-basic-interview-questions.html )
+
+## React Query
+
+## TypeScript

@@ -1,0 +1,36 @@
+<div ><h1>React Code-Splitting, Lazy, Suspense Interview Questions</h1><div><small>Published on <!-- -->19 Jan, 2021</small></div><p><strong>Question:</strong></p><p>What is bundling?</p><p><strong>Answer:</strong></p><p>Bundling is the process of combining multiple JavaScript files to one single file without breaking the dependency hierarchy. In a React project, we make use bundlers like Webpack or Browserify to bundle files.</p><div class="divider-module--divider--L0Vkx">----o----</div><p><strong>Question:</strong></p><p>What is Code Splitting? How it helps a React application?</p><p><strong>Answer:</strong></p><p>In a typical React project, all the components and their dependencies are bundled to one file. Therefore, as the size of application increases, the bundle size increases. This affects performance because to show a single page in the application, we need to load the full bundle first. Code splitting gives control to developer to efficiently load components on demand.</p><div class="divider-module--divider--L0Vkx">----o----</div><p><strong>Question:</strong></p><p>How can we implement code-splitting in React?</p><p><strong>Answer:</strong></p><p>One way to implement code-splitting is by using dynamic <code >import()</code> function. Webpack will not add the files included by dynamic import using <code >import()</code> to the main bundle file.</p><p>Second technique is to use <code >Lazy</code> and <code >Suspense</code>.</p><div class="divider-module--divider--L0Vkx">----o----</div><p><strong>Question:</strong></p><p>How <code >Lazy</code> and <code >Suspense</code> work in React?</p><p><strong>Answer:</strong></p><p><code >Lazy</code> and <code >Suspense</code> is used to implement code splitting in React. If there is a component like <code >&lt;RelatedProductsWidget /&gt;</code> which needs to be lazy loaded, we can go with <code >Lazy</code>.</p><p>First we keep the component ready using <code >Lazy</code>.</p><div  data-language="javascript"><pre ><code ><span >const</span> RelatedProductsWidget <span >=</span> React<span >.</span><span >lazy</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span>
+  <span >import</span><span >(</span><span >"./RelatedProductsWidget"</span><span >)</span>
+<span >)</span><span >;</span></code></pre></div><p>And whereever we need to render the component, we use <code >Suspense</code>.</p><div  data-language="javascript"><pre ><code ><span >&lt;</span>Suspense<span >&gt;</span>
+  <span >&lt;</span>RelatedProductsWidget <span >/</span><span >&gt;</span>
+<span >&lt;</span><span >/</span>Suspense<span >&gt;</span></code></pre></div><div class="divider-module--divider--L0Vkx">----o----</div><p><strong>Question:</strong></p><p>Here we have a component <code >&lt;App /&gt;</code> which loads <div></div> component using <code >Lazy</code>.</p><p>Banner.js</p><div><pre ><code ><span >import</span> React <span >from</span> <span >"react"</span><span >;</span>
+
+<span >function</span> <span >Banner</span><span >(</span><span >)</span> <span >{</span>
+  <span >return</span> <span >&lt;</span>div<span >&gt;</span>Here is the banner text<span >&lt;</span><span >/</span>div<span >&gt;</span><span >;</span>
+<span >}</span>
+
+<span >export</span> <span >default</span> Banner<span >;</span></code></pre></div><p>And here is the <code >&lt;App/&gt;</code> component that loads <code >&lt;Banner /&gt;</code>.</p><div  data-language="javascript"><pre ><code ><span >import</span> React<span >,</span> <span >{</span> lazy<span >,</span> Suspense <span >}</span> <span >from</span> <span >"react"</span><span >;</span>
+
+<span >const</span> Banner <span >=</span> <span >lazy</span><span >(</span><span >(</span><span >)</span> <span >=&gt;</span> <span >import</span><span >(</span><span >"./Banner"</span><span >)</span><span >)</span><span >;</span>
+
+<span >function</span> <span >App</span><span >(</span><span >)</span> <span >{</span>
+  <span >return</span> <span >(</span>
+    <span >&lt;</span>div<span >&gt;</span>
+      <span >&lt;</span>h1<span >&gt;</span>Lazy Loading<span >&lt;</span><span >/</span>h1<span >&gt;</span>
+      <span >&lt;</span>Banner <span >/</span><span >&gt;</span>
+    <span >&lt;</span><span >/</span>div<span >&gt;</span>
+  <span >)</span><span >;</span>
+<span >}</span>
+
+<span >export</span> <span >default</span> App<span >;</span></code></pre></div><p>For some reasons the application is not working. What can be the issue?</p><p><strong>Answer:</strong></p><p><code >&lt;Banner/&gt;</code> needs to be wrapped inside <code >&lt;Suspense&gt;</code>. Now, React is trying to load the banner component immediately. It is not waiting for the lazy load response. That is why it throws the error.</p><div class="divider-module--divider--L0Vkx">----o----</div><p><strong>Question:</strong></p><p>What is the purpose of <code >fallback</code> property in <code >Suspense</code>?</p><p><strong>Answer:</strong></p><p><code >Suspense</code> lazy loads a component and renders it. During the waiting time, the component which is set as fallback will be displayed.</p><div class="divider-module--divider--L0Vkx">----o----</div><p><strong>Question:</strong></p><p>Improve the performance of following code using <code >Lazy</code> and <code >Suspense</code>?</p><div  data-language="javascript"><pre ><code ><span >import</span> React<span >,</span> <span >{</span> Suspense<span >,</span> lazy <span >}</span> <span >from</span> <span >"react"</span><span >;</span>
+<span >import</span> <span >{</span> BrowserRouter <span >as</span> Router<span >,</span> Route<span >,</span> Switch <span >}</span> <span >from</span> <span >"react-router-dom"</span><span >;</span>
+<span >import</span> Home <span >from</span> <span >"./routes/Home"</span><span >;</span>
+<span >import</span> About <span >from</span> <span >"./routes/About"</span><span >;</span>
+
+<span >const</span> <span >App</span> <span >=</span> <span >(</span><span >)</span> <span >=&gt;</span> <span >(</span>
+  <span >&lt;</span>Router<span >&gt;</span>
+    <span >&lt;</span>Switch<span >&gt;</span>
+      <span >&lt;</span>Route exact path<span >=</span><span >"/"</span> component<span >=</span><span >{</span>Home<span >}</span> <span >/</span><span >&gt;</span>
+      <span >&lt;</span>Route path<span >=</span><span >"/about"</span> component<span >=</span><span >{</span>About<span >}</span> <span >/</span><span >&gt;</span>
+    <span >&lt;</span><span >/</span>Switch<span >&gt;</span>
+  <span >&lt;</span><span >/</span>Router<span >&gt;</span>
+<span >)</span><span >;</span></code></pre></div><div class="divider-module--divider--L0Vkx">----o----</div><p><strong>Question:</strong></p><p>Will <code >lazy</code> works with React components that does not default exports?</p><p><strong>Answer: </strong></p><p>No.</p></div>
