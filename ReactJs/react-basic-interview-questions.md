@@ -43,11 +43,12 @@ const content = React.createElement(
 );
 ```
 
-###Question
+### Question
 
 Explain the parameters of React.createElement() method.
 
-###Solution
+### Solution
+
 `React.createElement()` accepts three arguments.
 
 `createElement(tag, attributes, children);`
@@ -59,20 +60,20 @@ turns out to be
 
 `<div id="hello">Backbencher</div>`
 
-###Question
+### Question
 
 What is JSX? What is the advantage of using it?
 
-###Solution
+### Solution
 
 JSX is a syntax extension for JavaScript. It is created to write React components easily. Without JSX, it is very
 difficult to write big React components in pure JavaScript.
 
-###Question
+### Question
 
 Write an example of React functional component.
 
-###Solution
+### Solution
 
 In React, functional component is a JavaScript function that returns a React element.
 
@@ -82,23 +83,23 @@ return <h1>Backbencher</h1>;
 }
 ```
 
-###Question
+### Question
 
 What are props in a component?
 
-###Solution
+### Solution
 
 When React sees an element representing a user-defined component, it passes JSX attributes and children to this component as a single object. That object, we address as props.
 
-###Question
+### Question
 
 What is a pure function?
 
-###Solution
+### Solution
 
 A pure function does not alter its input. It always return the same value for the same input. In React, a component needs to be a pure function with respect to its props. That means for a particular props, the rendered component will always be same.
 
-###Question
+### Question
 
 We have a function component here.
 
@@ -110,7 +111,7 @@ function Banner(props) {
 
 Convert above code to class component.
 
-###Solution
+### Solution
 
 ```
 class Banner extends React.Component {
@@ -120,7 +121,7 @@ class Banner extends React.Component {
 }
 ```
 
-###Question
+### Question
 
 Here we have a class component.
 
@@ -148,7 +149,7 @@ class Banner extends React.Component {
 
 Here when the button is clicked, it should display "Backbencher" text. But that is not happening. What is the cause?
 
-###Solution
+### Solution
 
 Here state is updated in wrong way. state value needs to be updated using this.setState(). Only then the UI will be re-rendered.
 
@@ -162,15 +163,15 @@ incrementCount = () => {
 };
 ```
 
-###Question
+### Question
 
 Is setState() method synchronous or asynchronous?
 
-###Solution
+### Solution
 
 setState() method is asynchronous.
 
-###Question
+### Question
 
 Following code is giving unexpected result.
 
@@ -182,7 +183,7 @@ this.setState({
 
 What could be the reason? How can we fix it?
 
-###Solution
+### Solution
 
 Since setState() is asynchronous, setting new state based on previous state can go wrong sometimes. In such scenarios, we can use callback function syntax to set state.
 
@@ -194,7 +195,7 @@ this.setState((prevState, props) => {
 });
 ```
 
-###Question
+### Question
 
 In a class component, we have set initial state as:
 
@@ -215,7 +216,7 @@ this.setState({
 
 What will be the current value of state object?
 
-###Solution
+### Solution
 
 States are merged in class components. So the state value will be:
 
@@ -226,7 +227,7 @@ States are merged in class components. So the state value will be:
 }
 ```
 
-###Question
+### Question
 
 Here we have a class component:
 
@@ -263,7 +264,7 @@ Uncaught TypeError: Cannot read property 'state' of undefined
 
 What is the reason and how we can solve it?
 
-###Solution
+### Solution
 
 Here logMessage function is called when the button is clicked. Since the function is not an arrow function, the value of this inside the function is undefined. We are trying to extract the value of state from undefined. That results in TypeError.
 
@@ -284,11 +285,11 @@ logMessage = () => {
 };
 ```
 
-###Question
+### Question
 
 How can we conditionally render JSX in React?
 
-###Solution
+### Solution
 
 One technique is to use if operator. We cannot use if...else inside JSX. But we can dynamically return React elements based on a condition.
 
@@ -320,26 +321,26 @@ We can implement inline if...else using JavaScript ternary operator.
 }
 ```
 
-###Question
+### Question
 
 If a component need not render anything, what can we do?
 
-###Solution
+### Solution
 
 render() method or the functional component can return null.
 
-###Question
+### Question
 
 Why we provide a key attribute to list of items?
 
-###Solution
+### Solution
 
 Keys help React to understand which items are changed, added or removed.
 
-###Question
+### Question
 
 What is a controlled component in React?
 
-###Solution
+### Solution
 
 In a controlled component, the value of an input form element is controlled by React.
