@@ -6,6 +6,7 @@ Javascript Concepts to learn
 
     - [React Basic Interview Questions](https://github.com/anubhavbhatt/javascript-learning-concepts/ReactJs/react-basic-interview-questions.md)
     - [React Code-Splitting, Lazy, Suspense Interview Questions](https://github.com/anubhavbhatt/javascript-learning-concepts/ReactJs/react-code-splitting-lazy-suspense-interview-questions.md)
+    - [React Context API Interview Questions](https://github.com/anubhavbhatt/javascript-learning-concepts/ReactJs/react-context-api-interview-questions.md)
 
 ## React Query
 
