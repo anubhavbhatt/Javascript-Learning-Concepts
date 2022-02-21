@@ -1,24 +1,24 @@
-#React Basic Interview Questions
+## React Basic Interview Questions
 
-###Question
+### Question
 
 What is virtual DOM? How virtual DOM boosts React performance?
 
-###Solution
+### Solution
 
 Like the actual DOM, the virtual DOM is a node tree that lists elements, their attributes and content as objects and properties. render() method in ReactDOM creates a node tree from React components and updates this tree in response to mutations in the data model caused by actions.
 
 Whenever anything is changed, the entire UI is first re-rendered in virtual DOM representation. The difference between earlier virtual DOM representation and current one is calculated. The real DOM is updated with what has actually changed. Updating virtual DOM is very fast compared to real browser re-render. Hence performance is improved.
 
-###Question
+### Question
 
 In a React project, we add reference to 2 files. One is react.js and other one is react-dom.js. Why we have two include 2 files, instead of one?
 
-###Solution
+### Solution
 
 React component library is used in websites and also to create mobile apps using React Native. React.js file is a small file which does the job of creating components. Therefore it is used in both web and React-Native projects. In web, the components are then rendered in browser using react-dom.js. So the 2 files are separated for reusability.
 
-###Question
+### Question
 
 We have a JSX code snippet below.
 
@@ -33,7 +33,7 @@ const content = (
 
 Write the pure JavaScript code after JSX is converted to JavaScript.
 
-###Solution
+### Solution
 
 ```
 const content = React.createElement(
