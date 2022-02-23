@@ -22,12 +22,11 @@ React component library is used in websites and also to create mobile apps using
 
 We have a JSX code snippet below.
 
-```
+```javascript
 const content = (
-
-<div>
-  <h1>Backbencher</h1>
-</div>
+  <div>
+    <h1>Backbencher</h1>
+  </div>
 );
 ```
 
@@ -35,7 +34,7 @@ Write the pure JavaScript code after JSX is converted to JavaScript.
 
 ### Solution
 
-```
+```javascript
 const content = React.createElement(
   "div",
   {},
@@ -77,9 +76,9 @@ Write an example of React functional component.
 
 In React, functional component is a JavaScript function that returns a React element.
 
-```
+```javascript
 function Banner() {
-return <h1>Backbencher</h1>;
+  return <h1>Backbencher</h1>;
 }
 ```
 
@@ -103,7 +102,7 @@ A pure function does not alter its input. It always return the same value for th
 
 We have a function component here.
 
-```
+```javascript
 function Banner(props) {
   return <h1>{props.name}</h1>;
 }
@@ -113,7 +112,7 @@ Convert above code to class component.
 
 ### Solution
 
-```
+```javascript
 class Banner extends React.Component {
   render() {
     return <h1>{this.props.name}</h1>;
@@ -125,7 +124,7 @@ class Banner extends React.Component {
 
 Here we have a class component.
 
-```
+```javascript
 class Banner extends React.Component {
   state = {
     text: "",
@@ -137,7 +136,6 @@ class Banner extends React.Component {
 
   render() {
     return (
-
       <div>
         <button onClick={this.incrementCount}>Click</button>
         <h1>{this.state.text}</h1>
@@ -155,7 +153,7 @@ Here state is updated in wrong way. state value needs to be updated using this.s
 
 The incrementCount needs to be updated as
 
-```
+```javascript
 incrementCount = () => {
   this.setState({
     text: "Backbencher",
@@ -175,7 +173,7 @@ setState() method is asynchronous.
 
 Following code is giving unexpected result.
 
-```
+```javascript
 this.setState({
   counter: this.state.counter + this.props.increment,
 });
@@ -187,7 +185,7 @@ What could be the reason? How can we fix it?
 
 Since setState() is asynchronous, setting new state based on previous state can go wrong sometimes. In such scenarios, we can use callback function syntax to set state.
 
-```
+```javascript
 this.setState((prevState, props) => {
   return {
     counter: prevState.counter + props.increment,
@@ -199,7 +197,7 @@ this.setState((prevState, props) => {
 
 In a class component, we have set initial state as:
 
-```
+```javascript
 state = {
   name: "Backbencher",
   age: 23,
@@ -208,7 +206,7 @@ state = {
 
 We then update the state with following code:
 
-```
+```javascript
 this.setState({
   age: 24,
 });
@@ -220,7 +218,7 @@ What will be the current value of state object?
 
 States are merged in class components. So the state value will be:
 
-```
+```javascript
 {
   name: "Backbencher",
   age: 24
@@ -231,7 +229,7 @@ States are merged in class components. So the state value will be:
 
 Here we have a class component:
 
-```
+```javascript
 class Banner extends React.Component {
   state = {
     country: "India",
@@ -247,7 +245,6 @@ class Banner extends React.Component {
 
   render() {
     return (
-
       <div>
         <button onClick={this.logMessage}>Click</button>
       </div>
@@ -258,7 +255,7 @@ class Banner extends React.Component {
 
 When the button is clicked, it is showing an error message instead of displaying India.
 
-```
+```javascript
 Uncaught TypeError: Cannot read property 'state' of undefined
 ```
 
@@ -270,7 +267,7 @@ Here logMessage function is called when the button is clicked. Since the functio
 
 We can solve this by explicitly binding logMessage to the component class using bind method.
 
-```
+```javascript
 constructor(props) {
   super(props);
   this.logMessage = this.logMessage.bind(this);
@@ -279,7 +276,7 @@ constructor(props) {
 
 We can also change logMessage to an arrow function to solve this issue.
 
-```
+```javascript
 logMessage = () => {
   console.log(this.state.country);
 };
@@ -293,31 +290,27 @@ How can we conditionally render JSX in React?
 
 One technique is to use if operator. We cannot use if...else inside JSX. But we can dynamically return React elements based on a condition.
 
-```
+```javascript
 if (isLoggedIn) {
-  return
-    <Member />;
+  return;
+  <Member />;
 } else {
-  return
-    <Guest />;
+  return;
+  <Guest />;
 }
 ```
 
 Another technique is to use logical operators to implement inline if.
 
-```
-<div>{count > 10 &&
-  <ShowCount />}
-</div>
+```javascript
+<div>{count > 10 && <ShowCount />}</div>
 ```
 
 We can implement inline if...else using JavaScript ternary operator.
 
-```
+```javascript
 {
-  isLoggedIn ?
-  <Member /> :
-  <Guest />;
+  isLoggedIn ? <Member /> : <Guest />;
 }
 ```
 
