@@ -6,6 +6,7 @@ Javascript Concepts to learn
 
 - [Javascript Basics Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/JavaScript/Basics.md)
 - [Javscript Exercises](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/JavaScript/Exercise.md)
+- [Javascript Basic Concepts](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/JavaScript/Concepts.md)
 
 ## React JS
 
