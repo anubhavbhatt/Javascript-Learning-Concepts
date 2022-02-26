@@ -2,6 +2,11 @@
 
 Javascript Concepts to learn
 
+## JavaScript
+
+- [Javascript Basics Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/JavaScript/Basics.md)
+- [Javscript Exercises](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/JavaScript/Exercise.md)
+
 ## React JS
 
 - [React Basic Interview Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/ReactJs/react-basic-interview-questions.md)
@@ -10,7 +15,3 @@ Javascript Concepts to learn
 - [React Hooks Interview Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/ReactJs/react-hooks-interview-questions.md)
 - [React Refs Interview Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/ReactJs/react-refs-interview-questions.md)
 - [React Render Props Interview Questions](https://github.com/anubhavbhatt/Javascript-Learning-Concepts/blob/main/ReactJs/react-render-props-interview-questions.md)
-
-## React Query
-
-## TypeScript
